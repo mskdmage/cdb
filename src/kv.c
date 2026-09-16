@@ -49,6 +49,8 @@ int kv_put(kv_t *db, char *key, char *value) {
 			if (!newval) {
 				return -1;
 			}
+			
+			free(selected_entry->value);
 
 			selected_entry->value = newval;
 			return 0;
@@ -164,7 +166,7 @@ int kv_free(kv_t *db) {
 		
 		kv_entry_t *selected_entry = &(db->entries[i]);
 
-		if (selected_entry && selected_entry->key != (void*)TOMBSTONE) {
+		if (selected_entry->key != NULL && selected_entry->key != (void*)TOMBSTONE) {
 			free(selected_entry->key);
 			free(selected_entry->value);
 			selected_entry->key = NULL;
