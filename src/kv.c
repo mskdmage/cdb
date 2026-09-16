@@ -1,4 +1,6 @@
 #include <string.h>
+#include <stdlib.h>
+#include <string.h>
 #include "kv.h"
 
 #define TOMBSTONE 0x1
