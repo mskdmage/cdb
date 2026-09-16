@@ -3,7 +3,7 @@
 
 int main(void) {
 	
-	kv_t *table = kv_init(3);
+	kv_t *table = kv_init(20);
 	
 	if (table == NULL) {
 		printf("%s\n", "Something terrible happened!");
@@ -14,6 +14,17 @@ int main(void) {
 	printf("Capacity:	%d\n", (int)table->capacity);
 	printf("Entries:	%d\n", (int)table->count);
 	
+	kv_put(table, "Hear", "no evil");
+	kv_put(table, "See", "no evil");
+	kv_put(table, "Speak", "no evil");
+
+	for (int i=0; i < table->capacity - 1; i++) {
+		if (table->entries[i].key) {
+			printf("%d	| %s	| %s\n", i, table->entries[i].key, table->entries[i].value);
+		}
+	}
+
+
 	free(table->entries);
 	table->entries = NULL;
 

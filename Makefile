@@ -8,4 +8,4 @@ execute:
 run: default test execute
 
 test:
-	@valgrind --leak-check=full ./bin/main -s
+	@valgrind --leak-check=full -s ./bin/main
