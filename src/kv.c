@@ -112,6 +112,43 @@ char *kv_get(kv_t *db, char *key) {
 	return NULL;
 }
 
+// fn kv_delete
+// params:
+// 	- db: a pointer to a database of type kv_t
+// 	- key: a pointer to the key
+// returns:
+// 	the pointer to the dleeted index, on not found -1
+int kv_delete(kv_t *db, char *key) {
+	
+	if (!db || !key) {
+		return -1;
+	}
+	
+	size_t idx = hash(key, db->capacity);
+
+	for (int i=0; i < db->capacity - 1; i++) {
+		
+		size_t real_idx = (idx + i) % db->capacity;
+
+		kv_entry_t *selected_entry = &(db->entries[real_idx]);
+
+		if (selected_entry->key == NULL) {
+			return -1;
+		}
+
+		if (selected_entry->key && selected_entry->key != (void*)TOMBSTONE && !strcmp(selected_entry->key, key)) {
+			free(selected_entry->key);
+			free(selected_entry->value);
+			db->count--;
+			selected_entry->key = (void*)TOMBSTONE;
+			selected_entry->value = NULL;
+			return real_idx;
+		}
+	}
+
+	return -1;
+
+}
 
 kv_t *kv_init(size_t capacity) {
 
