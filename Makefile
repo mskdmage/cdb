@@ -1,5 +1,5 @@
 default:
-	@gcc -I ./include -o ./bin/main src/*.c -Wall
+	@gcc -I ./inc -o ./bin/main src/*.c -Wall
 
 execute:
 	@echo "\nBINARY EXECUTION\n" &&\
