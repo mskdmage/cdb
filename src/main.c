@@ -24,6 +24,8 @@ int main(void) {
 		}
 	}
 
+	printf("Looking for %s -> found: %s\n", "See", kv_get(table, "See"));
+	printf("Looking for %s -> found: %s\n", "Monkey", kv_get(table, "Monkey"));
 
 	free(table->entries);
 	table->entries = NULL;
