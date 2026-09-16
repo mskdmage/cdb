@@ -159,9 +159,10 @@ int kv_delete(kv_t *db, char *key) {
 // 	- db: a pointer to a database of type kv_t
 // returns:
 // 	0 on success, -1 on failure
-int kv_free(kv_t *db) {
+void kv_free(kv_t *db) {
 	if (!db) {
-		return -1;
+		return;
+		//return -1;
 	}
 
 	for (int i=0; i < db->capacity -1; i++) {
@@ -181,7 +182,8 @@ int kv_free(kv_t *db) {
 	db->entries = NULL;
 	free(db);
 
-	return 0;
+	//return 0;
+	return;
 }
 
 kv_t *kv_init(size_t capacity) {
