@@ -51,7 +51,7 @@ int kv_put(kv_t *db, char *key, char *value) {
 			}
 
 			selected_entry->value = newval;
-			return real_idx;
+			return 0;
 
 		}
 
@@ -71,7 +71,7 @@ int kv_put(kv_t *db, char *key, char *value) {
 			selected_entry->key = newkey;
 			selected_entry->value = newval;
 			db->count++;
-			return real_idx;
+			return 0;
 		}
 
 
