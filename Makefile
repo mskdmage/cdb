@@ -2,6 +2,10 @@ default:
 	@gcc -I ./include -o ./bin/main src/*.c -Wall
 
 execute:
-	@./bin/main
+	@echo "\nBINARY EXECUTION\n" &&\
+	./bin/main
 
-run: default execute
+run: default test execute
+
+test:
+	@valgrind --leak-check=full ./bin/main -s

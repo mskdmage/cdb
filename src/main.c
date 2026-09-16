@@ -12,7 +12,13 @@ int main(void) {
 
 	printf("Address:	%p\n", table);
 	printf("Capacity:	%d\n", (int)table->capacity);
-	printf("Items:		%d\n", (int)table->count);
+	printf("Entries:	%d\n", (int)table->count);
+	
+	free(table->entries);
+	table->entries = NULL;
+
+	free(table);
+	table = NULL;
 
 	return 0;
 }
