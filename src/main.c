@@ -30,11 +30,9 @@ int main(void) {
 	kv_delete(table, "See");
 
 	printf("Looking for %s -> found: %s\n", "See", kv_get(table, "See"));
+	
+	kv_free(table);
 
-	free(table->entries);
-	table->entries = NULL;
-
-	free(table);
 	table = NULL;
 
 	return 0;

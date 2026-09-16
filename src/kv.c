@@ -150,6 +150,36 @@ int kv_delete(kv_t *db, char *key) {
 
 }
 
+// fn kv_free
+// params:
+// 	- db: a pointer to a database of type kv_t
+// returns:
+// 	0 on success, -1 on failure
+int kv_free(kv_t *db) {
+	if (!db) {
+		return -1;
+	}
+
+	for (int i=0; i < db->capacity -1; i++) {
+		
+		kv_entry_t *selected_entry = &(db->entries[i]);
+
+		if (selected_entry && selected_entry->key != (void*)TOMBSTONE) {
+			free(selected_entry->key);
+			free(selected_entry->value);
+			selected_entry->key = NULL;
+			selected_entry->value = NULL;
+			db->count--;
+		}
+	}
+
+	free(db->entries);
+	db->entries = NULL;
+	free(db);
+
+	return 0;
+}
+
 kv_t *kv_init(size_t capacity) {
 
 	if (capacity == 0) {
